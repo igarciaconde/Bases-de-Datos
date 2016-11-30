@@ -8,10 +8,6 @@ CREATE TABLE Restaurantes(
 );
 drop table restaurantes;
 
-CREATE INDEX I_CatPlatos ON Platos(categoria);
-
-CREATE SEQUENCE Seq_CodPedidos INCREMENT BY 1 START WITH 1 NOMAXVALUE;
-
 CREATE TABLE clientes (
   DNI       char(9) primary key,
   nombre    VARCHAR(40) NOT NULL,
@@ -25,11 +21,10 @@ CREATE TABLE clientes (
   usuario   CHAR(8) NOT NULL unique,
   contraseña CHAR(8) default 'Nopass'
 );
-drop table clientes;
 --probando alter
 alter table clientes modify contraseña default 'Nopass';
 alter table clientes modify usuario unique;
-
+drop table clientes;
 
 CREATE TABLE Pedidos(
  codigo NUMBER(8) NOT NULL
@@ -42,22 +37,10 @@ CREATE TABLE Pedidos(
  , PRIMARY KEY(codigo)
  , CHECK (estado IN ('REST', 'CANCEL', 'RUTA', 'ENTREGADO', 'RECHAZADO'))
 );
+CREATE SEQUENCE Seq_CodPedidos INCREMENT BY 1 START WITH 1 NOMAXVALUE;
 drop table pedidos;
 
-CREATE TABLE Contiene(
- restaurante NUMBER(8)
- , plato CHAR(20)
- , pedido NUMBER(8) REFERENCES Pedidos(codigo) ON DELETE CASCADE
- , precioConComisión NUMBER(8,2)
- , unidades NUMBER(4)NOT NULL
- , PRIMARY KEY(restaurante, plato, pedido)
- , FOREIGN KEY(restaurante, plato) REFERENCES Platos(restaurante,nombre)
- 
-);
-drop table contiene;
-
-create table horarios 
-(
+create table horarios (
   restaurante number(8),
   diasemana char(1),
   hora_apertura date not null,
@@ -68,9 +51,7 @@ create table horarios
 );
 drop table horarios;
 
-
-create table platos
-(
+create table platos (
 restaurante number (8),
 nombre char(20) not null ,
 precio number(8, 2),
@@ -80,8 +61,9 @@ primary key(restaurante,nombre),
 foreign key (restaurante) references restaurantes (codigo) on delete cascade
 );
 drop table platos;
+CREATE INDEX I_CatPlatos ON Platos(categoria);
 
-CREATE TABLE Descuentos(
+CREATE TABLE Descuentos (
  codigo NUMBER(8) NOT NULL
  , fecha_caducidad DATE
  , "porcentaje descuento" NUMBER(3)not null,
@@ -90,7 +72,7 @@ CREATE TABLE Descuentos(
  );
  drop table descuentos;
  
- create table areasCobertura(
+ create table areasCobertura (
   restaurante number(8),
   codigoPostal char (5),
   primary key(restaurante,codigoPostal),
@@ -98,3 +80,14 @@ CREATE TABLE Descuentos(
   );
   drop table areasCobertura;
  
+ CREATE TABLE Contiene (
+ restaurante NUMBER(8)
+ , plato CHAR(20)
+ , pedido NUMBER(8) REFERENCES Pedidos(codigo) ON DELETE CASCADE
+ , precioConComisión NUMBER(8,2)
+ , unidades NUMBER(4)NOT NULL
+ , PRIMARY KEY(restaurante, plato, pedido)
+ , FOREIGN KEY(restaurante, plato) REFERENCES Platos(restaurante,nombre)
+ 
+);
+drop table contiene;
