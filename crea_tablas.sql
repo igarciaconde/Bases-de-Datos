@@ -7,6 +7,13 @@ CREATE TABLE Restaurantes(
  , PRIMARY KEY(codigo)
 );
 drop table restaurantes;
+delete from restaurantes;
+delete from horarios;
+delete from clientes;
+delete from contiene;
+delete from areascobertura;
+delete from platos;
+delete from pedidos;
 
 CREATE TABLE clientes (
   DNI       char(9) primary key,
@@ -47,10 +54,10 @@ create table horarios (
   hora_cierre date not null,
   primary key(restaurante,diasemana) ,
   foreign key (restaurante) references restaurantes (codigo),
-  check (diasemana in('l','m','x','j','v','s','d'))
+  check (diasemana in('L','M','X','J','V','S','D'))
 );
 drop table horarios;
-
+alter table horarios add constraint diaSemana check (diasemana in('L','M','X','J','V','S','D'));
 create table platos (
 restaurante number (8),
 nombre char(20) not null ,
@@ -91,3 +98,4 @@ CREATE TABLE Descuentos (
  
 );
 drop table contiene;
+
