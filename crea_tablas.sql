@@ -6,12 +6,11 @@ CREATE TABLE Restaurantes(
  , comision NUMBER(8,2)
  , PRIMARY KEY(codigo)
 );
+drop table restaurantes;
 
 CREATE INDEX I_CatPlatos ON Platos(categoria);
 
-CREATE SEQUENCE Seq_CodPedidos INCREMENT BY 1 START WITH 1
-
-NOMAXVALUE;
+CREATE SEQUENCE Seq_CodPedidos INCREMENT BY 1 START WITH 1 NOMAXVALUE;
 
 CREATE TABLE clientes (
   DNI       char(9) primary key,
@@ -24,8 +23,10 @@ CREATE TABLE clientes (
   codigopostal char(5),
   telefono number(9),
   usuario   CHAR(8) NOT NULL unique,
-  contraseña CHAR(8) default "Nopass"
+  contraseña CHAR(8) default 'Nopass'
 );
+drop table clientes;
+--probando alter
 alter table clientes modify contraseña default 'Nopass';
 alter table clientes modify usuario unique;
 
@@ -41,6 +42,7 @@ CREATE TABLE Pedidos(
  , PRIMARY KEY(codigo)
  , CHECK (estado IN ('REST', 'CANCEL', 'RUTA', 'ENTREGADO', 'RECHAZADO'))
 );
+drop table pedidos;
 
 CREATE TABLE Contiene(
  restaurante NUMBER(8)
@@ -49,9 +51,10 @@ CREATE TABLE Contiene(
  , precioConComisión NUMBER(8,2)
  , unidades NUMBER(4)NOT NULL
  , PRIMARY KEY(restaurante, plato, pedido)
- , FOREIGN KEY(restaurante, plato) REFERENCES Platos(restaurante,nombre),
+ , FOREIGN KEY(restaurante, plato) REFERENCES Platos(restaurante,nombre)
  
 );
+drop table contiene;
 
 create table horarios 
 (
@@ -63,6 +66,7 @@ create table horarios
   foreign key (restaurante) references restaurantes (codigo),
   check (diasemana in('l','m','x','j','v','s','d'))
 );
+drop table horarios;
 
 
 create table platos
@@ -73,10 +77,9 @@ precio number(8, 2),
 descripcion char (30),
 categoria char(10),
 primary key(restaurante,nombre),
-foreign key (restaurante) references restaurantes (codigo)
+foreign key (restaurante) references restaurantes (codigo) on delete cascade
 );
-
-alter table platos add constraint restriccion foreign key (restaurante) references restaurantes (codigo) on delete cascade ;
+drop table platos;
 
 CREATE TABLE Descuentos(
  codigo NUMBER(8) NOT NULL
@@ -85,6 +88,7 @@ CREATE TABLE Descuentos(
  CHECK ("porcentaje descuento" >0 AND "porcentaje descuento"<=100)
  , PRIMARY KEY(codigo)
  );
+ drop table descuentos;
  
  create table areasCobertura(
   restaurante number(8),
@@ -92,6 +96,5 @@ CREATE TABLE Descuentos(
   primary key(restaurante,codigoPostal),
   foreign key (restaurante) references restaurantes (codigo)
   );
-  
-  alter table 
+  drop table areasCobertura;
  
