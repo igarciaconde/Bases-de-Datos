@@ -1,7 +1,7 @@
 LOAD DATA
 INFILE 'pedidos.txt'
 APPEND
-INTO TABLE pedidos
+INTO TABLE Pedidos
 FIELDS TERMINATED BY ';'
 (
 	codigo,

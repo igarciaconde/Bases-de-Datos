@@ -1,7 +1,7 @@
  LOAD DATA
 INFILE 'horarios.txt'
 APPEND
-INTO TABLE horarios
+INTO TABLE Horarios
 FIELDS TERMINATED BY ';'
 (
 	restaurante,

@@ -1,13 +1,13 @@
  LOAD DATA
 INFILE 'contiene.txt'
 APPEND
-INTO TABLE contiene
+INTO TABLE Contiene
 FIELDS TERMINATED BY ';'
 (
 	restaurante,
 	plato,
 	pedido,
-	precioconcomision,
+	precioConComision,
 	unidades
 	
 )

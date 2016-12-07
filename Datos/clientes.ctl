@@ -1,7 +1,7 @@
  LOAD DATA
 INFILE 'clientes.txt'
 APPEND
-INTO TABLE clientes
+INTO TABLE Clientes
 FIELDS TERMINATED BY ';'
 (
 	dni,
@@ -14,6 +14,6 @@ FIELDS TERMINATED BY ';'
 	codigopostal,
 	telefono,
 	usuario,
-	"contraseña"
+	contraseÃ±a
 	
 )

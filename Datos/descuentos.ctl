@@ -1,7 +1,7 @@
 LOAD DATA
 INFILE 'descuentos.txt'
 APPEND
-INTO TABLE descuentos
+INTO TABLE Descuentos
 FIELDS TERMINATED BY ';'
 (
 	codigo,

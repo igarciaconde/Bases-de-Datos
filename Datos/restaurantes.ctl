@@ -1,7 +1,7 @@
 LOAD DATA
 INFILE 'restaurantes.txt'
 APPEND
-INTO TABLE restaurantes
+INTO TABLE Restaurantes
 FIELDS TERMINATED BY ';'
 (
 	codigo,
