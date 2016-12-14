@@ -3,6 +3,7 @@ INFILE 'clientes.txt'
 APPEND
 INTO TABLE Clientes
 FIELDS TERMINATED BY ';'
+TRAILING NULLCOLS
 (
 	dni,
 	nombre,
@@ -14,6 +15,6 @@ FIELDS TERMINATED BY ';'
 	codigopostal,
 	telefono,
 	usuario,
-	contraseña
+	contrasena
 	
 )

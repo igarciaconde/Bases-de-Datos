@@ -6,7 +6,6 @@ FIELDS TERMINATED BY ';'
 (
 	restaurante,
 	diasemana,
-	hora_apertura,
-	hora_cierre
-	
+	hora_apertura DATE "HH24:MI",
+	hora_cierre DATE "HH24:MI"
 )

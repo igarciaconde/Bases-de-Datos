@@ -1,9 +1,9 @@
 LOAD DATA
 INFILE 'areas.txt'
 APPEND
-INTO TABLE Areas
+INTO TABLE Areascobertura
 FIELDS TERMINATED BY ';'
 (
 	restaurante,
-	codigoPostal,
+	codigoPostal
 	)
