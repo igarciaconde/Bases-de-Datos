@@ -1,0 +1,5 @@
+begin
+  exec := REVISA_PRECIO_CON_COMISION;
+  exec := REVISA_PEDIDOS;
+  exec := DATOS_CLIENTES;
+END;
