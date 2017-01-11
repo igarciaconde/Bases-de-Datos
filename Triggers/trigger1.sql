@@ -12,22 +12,21 @@ IF DELETING THEN
   UPDATE
     pedidos
   SET
-  commit;
-    "importe total"="importe total" - :OLD.precioconcomision
+    "importe total"="importe total" - (:OLD.precioconcomision * :OLD.unidades)
   WHERE
     codigo = :OLD.pedido;
 ELSIF INSERTING THEN
   UPDATE
     pedidos
   SET
-    "importe total"="importe total" + :NEW.precioconcomision
+    "importe total"="importe total" + (:NEW.precioconcomision * :NEW.unidades)
   WHERE
     codigo = :NEW.pedido;
 ELSE
   UPDATE
     pedidos
   SET
-    "importe total"="importe total" - :OLD.precioconcomision + :NEW.precioconcomision
+    "importe total"="importe total" - (:OLD.precioconcomision * :OLD.unidades) + (:NEW.precioconcomision * :NEW.unidades)
   WHERE
     codigo = :NEW.pedido;
 END IF;
